@@ -7,7 +7,7 @@ name: Android
 on:
   push:
     branches:
-      - master
+      - real
 
 jobs:
   Build:
@@ -19,10 +19,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Unlock secrets
-        uses: sliteteam/github-action-git-crypt-unlock@1.2.0
-        env:
-          GIT_CRYPT_KEY: ${{ secrets.GITCRYPT_KEY }}
+      - run: git config --global --add safe.directory '*'
       - uses: actions/setup-java@v3
         with:
           distribution: "zulu"
